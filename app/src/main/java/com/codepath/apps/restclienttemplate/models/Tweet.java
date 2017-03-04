@@ -8,6 +8,8 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 public class Tweet extends BaseModel{
     private String text;
+    private User user;
+    private String createdAt;
 
     public String getText() {
         return text;
@@ -15,5 +17,21 @@ public class Tweet extends BaseModel{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
