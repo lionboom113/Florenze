@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class HomeTweet extends AppCompatActivity {
@@ -31,10 +32,12 @@ public class HomeTweet extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_tweet);
+        ButterKnife.bind(this);
         final HomeTweetAdapter homeTweetAdapter = new HomeTweetAdapter();
         tweets = new ArrayList<Tweet>();
         homeTweetAdapter.setmListTweet(tweets);
         homeTweetAdapter.setmContext(getApplicationContext());
+        rvHomeTweet.setAdapter(homeTweetAdapter);
         client = RestApplication.getRestClient();
         client.getHomeTimeline(1,new JsonHttpResponseHandler(){
             @Override
@@ -45,6 +48,7 @@ public class HomeTweet extends AppCompatActivity {
                 List<Tweet> myModelList = gson.fromJson(response.toString(), listType);
                 tweets.clear();
                 tweets.addAll(myModelList);
+                homeTweetAdapter.getmListTweet().addAll(tweets);
                 Log.d("chubby", "onSuccess: ");
                 homeTweetAdapter.notifyDataSetChanged();
                 Log.d("response", response.toString());
