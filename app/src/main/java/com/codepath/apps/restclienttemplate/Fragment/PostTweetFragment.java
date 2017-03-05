@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate.Fragment;
 
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.HomeTweet;
 import com.codepath.apps.restclienttemplate.R;
 
 import butterknife.BindView;
@@ -51,11 +54,12 @@ public class PostTweetFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         // Show soft keyboard automatically and request focus to field
         etPostTweet.requestFocus();
-        btnPostTweet.setOnContextClickListener(new View.OnContextClickListener() {
+        btnPostTweet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onContextClick(View v) {
-                etPostTweet.setText("Heowd");
-                return false;
+            public void onClick(View v) {
+                HomeTweet homeTweetActivity = (HomeTweet) getActivity();
+                homeTweetActivity.postTweet(etPostTweet.getText().toString());
+                dismiss();
             }
         });
 

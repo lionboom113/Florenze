@@ -52,7 +52,7 @@ public class HomeTweetAdapter  extends RecyclerView.Adapter<HomeTweetAdapter.Vie
         mListTweet.addAll(tweets);
         notifyDataSetChanged();
     }
-    public void clearTweet(List<Tweet> tweets){
+    public void clearTweet(){
         mListTweet.clear();
         notifyDataSetChanged();
     }
