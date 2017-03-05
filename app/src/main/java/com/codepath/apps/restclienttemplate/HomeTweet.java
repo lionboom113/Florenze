@@ -44,6 +44,7 @@ public class HomeTweet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_tweet);
         ButterKnife.bind(this);
+        setTitle("Florenze");
         homeTweetAdapter = new HomeTweetAdapter();
         tweets = new ArrayList<Tweet>();
         homeTweetAdapter.setmListTweet(tweets);
