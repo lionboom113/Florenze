@@ -53,7 +53,6 @@ public class RestClient extends OAuthBaseClient {
 	public void getCurrentUser(AsyncHttpResponseHandler handler) {
 		String currentUserApiUrl = getApiUrl("account/verify_credentials.json");
 		RequestParams params = new RequestParams();
-		params.put("skip_status", String.valueOf(true));
 		client.get(currentUserApiUrl, handler);
 	}
 
@@ -64,13 +63,25 @@ public class RestClient extends OAuthBaseClient {
 		client.post(postTweetApiUrl, params, handler);
 	}
 
+	public void getMentionTimeline(AsyncHttpResponseHandler handler) {
+		String currentUserApiUrl = getApiUrl("statuses/mentions_timeline.json");
+		RequestParams params = new RequestParams();
+		client.get(currentUserApiUrl, params, handler);
+	}
 
-	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
-	 * 	  i.e getApiUrl("statuses/home_timeline.json");
-	 * 2. Define the parameters to pass to the request (query or body)
-	 *    i.e RequestParams params = new RequestParams("foo", "bar");
-	 * 3. Define the request method and make a call to the client
-	 *    i.e client.get(apiUrl, params, handler);
-	 *    i.e client.post(apiUrl, params, handler);
-	 */
+	public void getUserTimeline(String userId, AsyncHttpResponseHandler handler) {
+		String currentUserApiUrl = getApiUrl("statuses/user_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("user_id", userId);
+		params.put("count",200);
+		client.get(currentUserApiUrl, params, handler);
+	}
+	public void getUserShow(String id, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("users/show.json");
+		RequestParams params = new RequestParams();
+		params.put("user_id", id);
+		getClient().get(apiUrl, params, handler);
+	}
+
+
 }
