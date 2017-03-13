@@ -149,6 +149,16 @@ public class HomeTweet extends AppCompatActivity {
         }
 
     }
+    public void postTweet(String text){
+        client.postTweet(text, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                page = 0;
+                homeTweetAdapter.clearTweet();
+                loadPage(++page);
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
